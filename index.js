@@ -15,7 +15,9 @@
  */
 function logNames(items) {
   // TODO: use `forEach`
+  items.forEach(e => console.log(e.name));
 }
+
 
 /**
  * @param {Item[]} items - array of items
@@ -23,6 +25,9 @@ function logNames(items) {
  */
 function getUppercaseNames(items) {
   // TODO: use `map`
+  let string = [];
+  items.map(e => string.push(e.name.toUpperCase()));
+  return string;
 }
 
 /**
@@ -32,6 +37,7 @@ function getUppercaseNames(items) {
  */
 function getItemById(items, id) {
   // TODO: use `find`
+  return items.find(e => e.id === id);
 }
 
 /**
@@ -41,6 +47,13 @@ function getItemById(items, id) {
  */
 function getItemPriceByName(items, name) {
   // TODO: use a loop!
+  let price = 0;
+  items.forEach((e) => {
+    if (e.name === name){
+      price = e.price;
+    }
+  });
+  return price;
 }
 
 /**
@@ -50,6 +63,8 @@ function getItemPriceByName(items, name) {
  */
 function getItemsByCategory(items, category) {
   // TODO: use `filter`
+  const results = items.filter((e) => e.category === category);
+  return results;
 }
 
 /**
@@ -58,6 +73,8 @@ function getItemsByCategory(items, category) {
  */
 function countItems(items) {
   // TODO: use `reduce`
+   return items.reduce((total, item) => total + item.quantity, 0 );
+  
 }
 
 /**
@@ -66,6 +83,7 @@ function countItems(items) {
  */
 function calculateTotalPrice(items) {
   // TODO: use `reduce`
+  return items.reduce((total, item) => total + item.price * item.quantity, 0);
 }
 
 // --------------------- DO NOT CHANGE THE CODE BELOW ------------------------ //
@@ -91,16 +109,16 @@ console.log(`In total, we have ${countItems(INVENTORY)} items in stock.`);
 
 const totalCost = calculateTotalPrice(INVENTORY);
 console.log(
-  `It would cost $${totalCost?.toFixed(2)} to purchase everything in stock.`
+  `It would cost $${totalCost.toFixed(2)} to purchase everything in stock.`
 );
 
 const itemId = prompt("Enter the ID of an item:", "1");
-console.log(`The item with id #${itemId} is:`);
+console.log(`The item with id $${itemId} is:`);
 console.log(getItemById(INVENTORY, +itemId));
 
 const itemName = prompt("Enter the name of an item:", "apple");
 console.log(
-  `The price of ${itemName} is ${getItemPriceByName(INVENTORY, itemName)}.`
+  `The price of ${itemName} is $${getItemPriceByName(INVENTORY, itemName)}.`
 );
 
 const category = prompt("Enter a category you would like to see:", "fruit");
